@@ -30,7 +30,15 @@ let depositMoney () =
 //Method to show then balance of account 
 let showBalance (int) = 
     Console.WriteLine("Balance : ")
-    printfn "%i" balance   
+    printfn "%i" balance  
+//Method to withdraw money from the account and check that the amount does not exceed the balance     
+let withdrawMoney () = 
+    Console.WriteLine("Balance of Account : ")
+    Console.WriteLine(balance)
+
+    //To:do Need to create a method to withdraw money from the account and check the balance is >= amount withdrawn
+
+
     
 //Menu Selection method
 let rec menu ()=
@@ -41,6 +49,9 @@ let rec menu ()=
         menu()
     |true, 2 ->
         showBalance()
+        menu()
+    |true, 3 -> 
+        withdrawMoney()
         menu()
 
 
