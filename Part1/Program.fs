@@ -2,7 +2,7 @@
 
 open System
 
-let mutable balance = 0
+let mutable balance = float(0)
 
 
 Console.WriteLine("Welcome please Enter your account number")
@@ -21,16 +21,16 @@ let getInput () = Int32.TryParse (Console.ReadLine())
 let depositMoney () = 
     printfn "Deposit Money"
     printfn "Please Enter amount you wish to add (Numbers Only)"
-    let a = int(Console.ReadLine())
-    let b = 0
+    let a = float(Console.ReadLine())
+    let b = float(0)
     let c = a + b
     balance <- c + balance
-    printfn "%i" balance
+    printfn "%.2f" balance
     
 //Method to show then balance of account 
-let showBalance (int) = 
+let showBalance (float) = 
     Console.WriteLine("Balance : ")
-    printfn "%i" balance  
+    printfn "%.2f" balance  
 //Method to withdraw money from the account and check that the amount does not exceed the balance     
 let withdrawMoney () = 
     Console.WriteLine("Balance of Account : ")
