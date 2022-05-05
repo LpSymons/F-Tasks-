@@ -2,9 +2,11 @@
 
 open System
 
+//Task 1
+
 let mutable balance = float(0)
 
-
+//Print method for user welcome
 Console.WriteLine("Welcome please Enter your account number")
 let accountNumber = string(Console.ReadLine())
 Console.WriteLine("Welcome  ")
@@ -15,6 +17,7 @@ let printMenu () =
     printfn "Please select one of the folllwing options"
     printfn "1. Deposit Money"
     printfn "2. Show Balance"
+    printfn "3. Withdraw Money"
 let getInput () = Int32.TryParse (Console.ReadLine())
 
 //Method to deposit money into the balance
@@ -28,17 +31,22 @@ let depositMoney () =
     printfn "%.2f" balance
     
 //Method to show then balance of account 
-let showBalance (float) = 
+let checkBalance (float) = 
     Console.WriteLine("Balance : ")
     printfn "%.2f" balance  
+
 //Method to withdraw money from the account and check that the amount does not exceed the balance     
 let withdrawMoney () = 
     Console.WriteLine("Balance of Account : ")
     Console.WriteLine(balance)
-
-    //To:do Need to create a method to withdraw money from the account and check the balance is >= amount withdrawn
-
-
+    Console.WriteLine("Please Enter the Amount you wish to Withdraw")
+    let a = float(Console.ReadLine())
+    let b = float(0)
+    let c = float(a + b)
+    if balance < c then Console.WriteLine("Unavailable funds, please check balance")
+    elif a < float(0) then Console.WriteLine("Numbers Cannot be Negative")
+    elif c <= balance then balance <- balance - c    
+    
     
 //Menu Selection method
 let rec menu ()=
@@ -48,12 +56,11 @@ let rec menu ()=
         depositMoney()
         menu()
     |true, 2 ->
-        showBalance()
+        checkBalance()
         menu()
     |true, 3 -> 
         withdrawMoney()
         menu()
-
 
 menu()
 
