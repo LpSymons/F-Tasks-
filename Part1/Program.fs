@@ -45,9 +45,13 @@ let withdrawMoney () =
     let c = float(a + b)
     if balance < c then Console.WriteLine("Unavailable funds, please check balance")
     elif a < float(0) then Console.WriteLine("Numbers Cannot be Negative")
-    elif c <= balance then balance <- balance - c    
-    
-    
+    elif c <= balance then balance <- balance - c   
+
+//Input error default message    
+let menuPrint() =
+    let menuString = "Please Enter a number between 1 and 3"
+    Console.WriteLine(menuString)
+        
 //Menu Selection method
 let rec menu ()=
     printMenu()
@@ -61,9 +65,11 @@ let rec menu ()=
     |true, 3 -> 
         withdrawMoney()
         menu()
+    | _ -> 
+        menuPrint()
+        menu()
 
 menu()
-
 
 
 
