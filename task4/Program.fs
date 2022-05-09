@@ -23,9 +23,11 @@ let BookSeat _ =
                         Console.WriteLine("Please enter your name")
                         let name = Console.ReadLine()
                         let newticket = {seat=seat; customer=name}
-                        //list.map help!!!
-                        printfn "%s" "seat does not exist")
-
+                        //list.map issue with bool
+                        for n in ticket do 
+                            if n.seat = seat then ticket.[seat] = newticket |>ignore 
+                            else printfn "%s" "seat does not exist")
+                        
 
 ThreadPool.QueueUserWorkItem(new WaitCallback(BookSeat)) |> ignore
 
@@ -35,7 +37,54 @@ Thread.Sleep(10000)
 
 DisplayTickets ticket
 
+
 (*
-for n in ticket do 
-    if n.seat = seat then ticket.[seat] = newticket |>ignore 
-    else printfn "%s" "seat does not exist" ) *)
+    let bookSeat _ =
+        lock (seat) (fun _ ->
+          Console.WriteLine("Enter seat number: ")
+          seatNo := int(Console.ReadLine())
+        )
+    
+
+    (*open System
+    open System.Threading
+    
+    type Ticket = {seat:int; customer:string}
+    let mutable tickets = [for n in 1..10 -> {Ticket.seat = n; Ticket.customer = ""}]
+    let bookSeat _ =
+        Console.WriteLine("Enter seat number: ")
+        let seatNo = int(Console.ReadLine())
+        Console.WriteLine("Enter customer name: ")
+        let name = string(Console.ReadLine())
+        let book seatNo name tickets = 
+            tickets |> List.map (fun ticket ->
+                if ticket.seat = seatNo then { ticket with customer = name }
+                else ticket )    
+        tickets <- book seatNo name tickets
+
+        let seatNo = ref 0
+        let name = ref ""
+        
+        let bookSeat _ =
+            Console.WriteLine("Enter seat number: ")
+            seatNo :=  int(Console.ReadLine())
+            Console.WriteLine("Enter customer name: ")
+            name:= string(Console.ReadLine().ToString())
+            let bookSeat _ =
+              lock (seatNo) (fun _ ->
+                Console.WriteLine("Enter seat number: ")
+                seatNo := int(Console.ReadLine())
+              )
+              |>ignore
+                lock (name) (fun _ -> 
+                    Console.WriteLine("Enter customer name: ")
+                    name:= string(Console.ReadLine().ToString()
+                  
+            |>ignore
+            tickets <- book !seatNo !name tickets
+        
+        ThreadPool.QueueUserWorkItem(new WaitCallback(bookSeat)) |> ignore
+        ThreadPool.QueueUserWorkItem(new WaitCallback(bookSeat)) |> ignore
+        Thread.Sleep(5000)
+        *)
+*)
