@@ -7,17 +7,17 @@ type Account = {accountNumber:string
                 member this.Deposit(money:float) = 
                     this.balance <- this.balance + money
                     Console.WriteLine($"You have added {money} to your account")
-                    Console.WriteLine("Current Balance :" + this.balance.ToString())
+                    Console.WriteLine("Current Balance :" + this.balance.ToString("0.00"))
                 member this.Withdraw(money:float) =
                     if money > this.balance then
                         Console.WriteLine("Unavailable funds, please check balance")
                     else 
                         this.balance <- this.balance - money
-                        Console.WriteLine("Amount WithDrawn :" + money.ToString())
-                        Console.WriteLine("Current Balance :" + this.balance.ToString())
+                        Console.WriteLine("Amount WithDrawn :" + money.ToString("0.00"))
+                        Console.WriteLine("Current Balance :" + this.balance.ToString("0.00"))
                 member this.Print =
                     Console.WriteLine(" - AccountNumber : " + this.accountNumber) 
-                    Console.WriteLine(" - Account Balance :" + this.balance.ToString())
+                    Console.WriteLine(" - Account Balance :" + this.balance.ToString("0.00"))
 
 let Acc1 = {accountNumber="0001"; balance=50.00}
 let Acc2 = {accountNumber="0002"; balance=75.00} 
