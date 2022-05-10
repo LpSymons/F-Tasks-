@@ -1,8 +1,47 @@
 ﻿// Learn more about F# at http://docs.microsoft.com/dotnet/fsharp
 
 open System
+// Task One
+type Account = {accountNumber:string 
+                mutable balance:float}  
+                member this.Deposit(money:float) = 
+                    this.balance <- this.balance + money
+                    Console.WriteLine($"You have added {money} to your account")
+                    Console.WriteLine("Current Balance :" + this.balance.ToString())
+                member this.Withdraw(money:float) =
+                    if money > this.balance then
+                        Console.WriteLine("Unavailable funds, please check balance")
+                    else 
+                        this.balance <- this.balance - money
+                        Console.WriteLine("Amount WithDrawn :" + money.ToString())
+                        Console.WriteLine("Current Balance :" + this.balance.ToString())
+                member this.Print =
+                    Console.WriteLine(" - AccountNumber : " + this.accountNumber) 
+                    Console.WriteLine(" - Account Balance :" + this.balance.ToString())
 
-//Task 1
+let Acc1 = {accountNumber="0001"; balance=50.00}
+let Acc2 = {accountNumber="0002"; balance=75.00} 
+let Acc3 = {accountNumber="0003"; balance=100.00} 
+let Acc4 = {accountNumber="0004"; balance=100.00} 
+let Acc5 = {accountNumber="0005"; balance=10.00} 
+let Acc6 = {accountNumber="0006"; balance=5.00} 
+
+Acc2.Print
+Acc2.Deposit 100.00
+Acc2.Withdraw 200.00
+Acc2.Withdraw 75.00
+Acc1.Print 
+Acc1.Withdraw 100.00
+Acc1.Deposit 15.00
+Acc1.Print
+
+
+
+
+
+
+//Task one attempt without using memebers
+(*
 
 let mutable balance = float(0)
 
@@ -70,6 +109,7 @@ let rec menu ()=
         menu()
 
 menu()
+*)
 
 
 
