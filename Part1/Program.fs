@@ -39,8 +39,8 @@ Acc1.Print
 
 
 
-
-//Task one attempt without using memebers
+//I have left this in as this is what I presented orignially and was asked to change but leave in
+//Task one attempt without using members that does not follow the breif with the functional approach
 (*
 
 let mutable balance = float(0)

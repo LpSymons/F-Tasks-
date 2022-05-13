@@ -1,8 +1,34 @@
 ﻿// Learn more about F# at http://docs.microsoft.com/dotnet/fsharp
-
 open System
 open System.Threading
 
+type Ticket = {seat:int; customer:string}
+let mutable tickets = [for n in 1..10 -> {Ticket.seat = n; Ticket.customer = ""}]
+
+let seatNo = ref 0
+let name = ref ""
+
+let bookSeat _ =
+    lock (seatNo) (fun _ ->
+    Console.WriteLine("Enter seat number: ")
+    seatNo := int(Console.ReadLine())
+  
+    lock (name) (fun _ -> 
+       Console.WriteLine("Enter customer name: ")
+       name:= string(Console.ReadLine().ToString())
+     
+let book seatNo name tickets = 
+        lock(seatNo,name) (fun()-> tickets |> List.map (fun ticket ->
+            if ticket.seat = seatNo then { ticket with customer = name }
+            else ticket ))    
+    tickets <- book !seatNo !name tickets
+
+ThreadPool.QueueUserWorkItem(new WaitCallback(bookSeat)) |> ignore
+ThreadPool.QueueUserWorkItem(new WaitCallback(bookSeat)) |> ignore
+Thread.Sleep(10000)
+
+// My other attempts 
+(*
 let myLock = ref 1
 
 type Ticket = {seat:int; customer:string}
@@ -37,6 +63,7 @@ Thread.Sleep(10000)
 
 DisplayTickets ticket
 
+*)
 
 (*
     let bookSeat _ =
@@ -44,9 +71,10 @@ DisplayTickets ticket
           Console.WriteLine("Enter seat number: ")
           seatNo := int(Console.ReadLine())
         )
+*)
     
-
-    (*open System
+(*
+    open System
     open System.Threading
     
     type Ticket = {seat:int; customer:string}
@@ -86,5 +114,6 @@ DisplayTickets ticket
         ThreadPool.QueueUserWorkItem(new WaitCallback(bookSeat)) |> ignore
         ThreadPool.QueueUserWorkItem(new WaitCallback(bookSeat)) |> ignore
         Thread.Sleep(5000)
-        *)
 *)
+
+
